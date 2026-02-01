@@ -1,0 +1,6 @@
+langchain
+langgraph
+streamlit
+langchain-google-genai
+google-generativeai
+requests

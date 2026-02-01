@@ -1,0 +1,32 @@
+1. Slower due to sequential execution:
+
+model.generate_content(prompt) is running 5-6 times for each run(research,outline,content,3x judge)
+No async
+
+Solutions:
+
+- Used graph.invoke_node() in ui.py to save extra 30 secs.
+- Used concurrent.futures to even save 20 secs - 30 secs (Parallelized, faster and fits perfect in langgraph).
+
+
+GraphRecursionError: Recursion limit of 25 reached without hitting a stop condition. You        
+can increase the limit by setting the `recursion_limit` confhooting, visit:
+https://python.langchain.com/docs/troubleshooting/errors/GRAPH_RECURSION_LIMIT
+
+INFO:__main__:Processing API response
+INFO:__main__:Processing state step 0 with result keys: dict_keys(['input', 'step', 'outline', 'content', 'feedback', 'approved_outline', 'score', 'evaluated'])     
+INFO:__main__:Initial input set  
+INFO:__main__:State processing complete. New step: 0
+2025-06-15 03:06:52.709 Removing orphaned files...
+
+Not generating the content :
+
+INFO:__main__:State processing complete. New step: 0
+2025-06-15 03:11:49.105 Removing orphaned files...
+2025-06-15 03:11:49.464 Ignoring changed path C:\Users\siddi\OneDrive\Desktop\Content-creator\__pycache__\app.cpython-311.pyc.      
+Watched_paths: {'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\ui.py': WatchedPath(md5='55d0bf6d3bbdba145be7561b8d018170', modification_time=1749937195.7238824, on_changed=<blinker.base.Signal object at 0x0000018AD88E5F90>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\state.py': WatchedPath(md5='755e429ba9a8f96a9c1a040f96cb9ec5', modification_time=1749937205.1265757, on_changed=<blinker.base.Signal object at 0x0000018ADCF91590>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\config.py': WatchedPath(md5='6acc056071b871ae5c0a45c69b1a3f51', modification_time=1749935936.9580154, on_changed=<blinker.base.Signal object at 0x0000018ADCF93ED0>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\research.py': WatchedPath(md5='2997e81e54f35ab7675f91811b1a791e', modification_time=1749935658.7574866, on_changed=<blinker.base.Signal object at 0x0000018ADCF904D0>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\outline.py': WatchedPath(md5='78c4811b5401f43603064771e254e0c2', modification_time=1749935636.6386967, on_changed=<blinker.base.Signal object at 0x0000018ADCF92FD0>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\content.py': WatchedPath(md5='6458a43c1b80a783d9969d533732b992', modification_time=1749935697.9765437, on_changed=<blinker.base.Signal object at 0x0000018ADCF92150>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\judge.py': WatchedPath(md5='1294b2325d1b2f35e96f0729fea432be', modification_time=1749935982.9555697, on_changed=<blinker.base.Signal object at 0x0000018ADD00E2D0>), 'C:\\Users\\siddi\\OneDrive\\Desktop\\Content-creator\\app.py': WatchedPath(md5='d7ffc2500ffb645e5d91e1d6d46fd853', modification_time=1749937270.8398454, on_changed=<blinker.base.Signal object at 0x0000018ADD00E750>)}    
+
+
+
+
+
